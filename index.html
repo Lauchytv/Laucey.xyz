@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laucey - Portfolio</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='70' fill='%2300d4ff'%3ELC%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles_interactive.css">
+</head>
+
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    <canvas id="bg-canvas"></canvas>
+    <canvas id="cursor-canvas"></canvas>
+
+    <nav class="navbar glass">
+        <div class="container nav-container">
+            <div class="nav-left">
+                <a href="#" class="logo" data-text="Laucey">Laucey</a>
+                <div class="status-tag">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Available for Work</span>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#stack">Tech Stack</a>
+                <a href="#contact" class="btn-primary">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container hero-content">
+                <div class="hero-text stagger-children">
+                    <h2 class="subtitle"><span id="typing-text" class="text-neon"></span><span
+                            class="typing-cursor">|</span></h2>
+                    <h1 class="glitch-text">
+                        Hey, I'm <br><span id="hero-typing-text"></span><span class="typing-cursor">|</span>
+                    </h1>
+                    <p class="hero-description">
+                        I develop next-generation code. No legacy. No compromises.
+                        Pure artificial intelligence, curated for maximum efficiency.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary glow">Inquire Project</a>
+                        <a href="#about" class="btn btn-secondary">My Approach</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual-card glass">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <div class="ai-badge">
+                                <span class="ai-dot"></span>
+                                <span>AI ACTIVE</span>
+                            </div>
+                        </div>
+                        <div class="header-right">
+                            <div class="metric">
+                                <span class="metric-label">Efficiency</span>
+                                <span class="metric-value">98%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="terminal-output">
+                            <div class="output-line">
+                                <span class="prompt">$</span>
+                                <span class="command">ai generate --project portfolio</span>
+                            </div>
+                            <div class="output-line success">
+                                <span class="icon">☑</span>
+                                <span>Analyzing requirements...</span>
+                            </div>
+                            <div class="output-line success">
+                                <span class="icon">☑</span>
+                                <span>Generating components...</span>
+                            </div>
+                            <div class="output-line success">
+                                <span class="icon">☑</span>
+                                <span>Optimizing performance...</span>
+                            </div>
+                            <div class="output-line processing">
+                                <span class="icon spinner">◐</span>
+                                <span>Deploying to production...</span>
+                            </div>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number">10x</div>
+                                <div class="stat-label">Faster</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">0</div>
+                                <div class="stat-label">Bugs</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">Quality</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section about-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">About <span class="text-neon">Code & AI</span></h2>
+                    <p class="section-subtitle">The new way of development</p>
+                </div>
+
+                <div class="bento-grid">
+                    <div class="bento-card large glass hover-lift">
+                        <div class="card-content">
+                            <div class="icon">
+                                <svg class="lucide-icon icon-neon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="m13 13-3-3m2 7 3-3m-5-1 3-3m-5 1 3-3" />
+                                    <path
+                                        d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.71.79-1.81.19-2.58l-.19-.19-.58-.58M16 10c0 4.42-3.58 8-8 8s-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8M12 12l2 2l4-4l-4-4l-2 2M22 2l-3 3l-2-2l3-3Z" />
+                                </svg>
+                            </div>
+                            <h3>I am Laucey</h3>
+                            <p>A 19-year-old developer from Germany. I first started using AI in 2020 and
+                                have since focused entirely on coding through the lens of artificial intelligence –
+                                pushing the limits of modern development.</p>
+                        </div>
+                        <div class="card-visual">
+                            <div class="visual-line"></div>
+                            <div class="visual-line"></div>
+                            <div class="visual-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="bento-card tall glass hover-lift">
+                        <div class="icon">
+                            <svg class="lucide-icon icon-neon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="4" width="16" height="16" rx="2" />
+                                <path d="M9 9h6v6H9z" />
+                                <path d="M15 2v2" />
+                                <path d="M15 20v2" />
+                                <path d="M2 15h2" />
+                                <path d="M2 9h2" />
+                                <path d="M20 15h2" />
+                                <path d="M20 9h2" />
+                                <path d="M9 2v2" />
+                                <path d="M9 20v2" />
+                            </svg>
+                        </div>
+                        <h3>Future Proof</h3>
+                        <p>I use tech stacks that will be standard tomorrow. No legacy problems.</p>
+                        <ul class="feature-list">
+                            <li>Next.js 15</li>
+                            <li>React Server Components</li>
+                            <li>Vercel AI SDK</li>
+                            <li>Turbopack</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card wide glass hover-lift">
+                        <div class="icon">
+                            <svg class="lucide-icon icon-neon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                            </svg>
+                        </div>
+                        <h3>Past Works</h3>
+                        <ul class="feature-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <li><span data-link="https://panel.laucey.xyz" class="card-link">Discord Bots</span>
+                            </li>
+                            <li>FiveM Servers</li>
+                            <li>Custom Webapps</li>
+                            <li>AI Integrations</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hero-visual orb-right">
+                    <div class="orb"></div>
+                    <div class="orb-plasma"></div>
+                    <div class="orb-core">
+                        <div class="orb-inner-glow"></div>
+                    </div>
+                    <div class="orb-rings">
+                        <div class="orb-ring ring-1"></div>
+                        <div class="orb-ring ring-2"></div>
+                        <div class="orb-ring ring-3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services-section">
+            <div class="services-wrapper">
+                <div class="service-indicators">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+
+                <div class="service-slides">
+                    <div class="service-slide active">
+                        <div class="container slide-content">
+                            <h2 class="section-title">01. <span class="text-neon">Analysis</span></h2>
+                            <p class="slide-description">
+                                Before a single line of code is written, my agents analyze your requirements.
+                                We break down complex problems into atomic tasks.
+                            </p>
+                            <ul class="feature-list">
+                                <li>Deep Context Understanding</li>
+                                <li>Architecture Planning</li>
+                                <li>Risk Assessment</li>
+                            </ul>
+                        </div>
+                        <div class="slide-visual">
+                            <div class="visual-card">
+                                <span class="visual-icon">
+                                    <svg class="lucide-icon icon-huge glow-purple" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04" />
+                                        <path
+                                            d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-slide">
+                        <div class="container slide-content">
+                            <h2 class="section-title">02. <span class="text-neon">Execution</span></h2>
+                            <p class="slide-description">
+                                LLMs generate the code. I orchestrate.
+                                The result is clean, typed, and perfectly documented software in record time.
+                            </p>
+                            <ul class="feature-list">
+                                <li>Automated Refactoring</li>
+                                <li>Test Driven Generation</li>
+                                <li>Instant Documentation</li>
+                            </ul>
+                        </div>
+                        <div class="slide-visual">
+                            <div class="visual-card">
+                                <span class="visual-icon">
+                                    <svg class="lucide-icon icon-huge glow-purple" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-slide">
+                        <div class="container slide-content">
+                            <h2 class="section-title">03. <span class="text-neon">Evolve</span></h2>
+                            <p class="slide-description">
+                                Software is never finished. My systems are designed to grow with new data
+                                and optimize themselves.
+                            </p>
+                            <ul class="feature-list">
+                                <li>Auto-Scaling</li>
+                                <li>Performance Monitoring</li>
+                                <li>Continuous Integration</li>
+                            </ul>
+                        </div>
+                        <div class="slide-visual">
+                            <div class="visual-card">
+                                <span class="visual-icon">
+                                    <svg class="lucide-icon icon-huge glow-purple" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1v7z" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stack" class="section stack-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">My <span class="text-neon">Tools</span></h2>
+                </div>
+
+                <div class="stack-marquee">
+                    <div class="marquee-content animate-marquee">
+                        <div class="stack-item">ChatGPT-4o</div>
+                        <div class="stack-item">Claude 3.5 Sonnet</div>
+                        <div class="stack-item">GitHub Copilot</div>
+                        <div class="stack-item">Midjourney</div>
+                        <div class="stack-item">Anti Gravity</div>
+                        <div class="stack-item">Cursor</div>
+                        <div class="stack-item">Gemini Pro</div>
+                        <div class="stack-item">ChatGPT-4o</div>
+                        <div class="stack-item">Claude 3.5 Sonnet</div>
+                        <div class="stack-item">GitHub Copilot</div>
+                        <div class="stack-item">Midjourney</div>
+                        <div class="stack-item">Anti Gravity</div>
+                        <div class="stack-item">Cursor</div>
+                        <div class="stack-item">Gemini Pro</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact-section" style="position: relative; overflow: hidden;">
+            <div class="container" style="position: relative; z-index: 2;">
+                <div class="contact-wrapper glass glow">
+                    <h2 class="section-title">Contact Me</h2>
+                    <p class="section-subtitle" style="margin-bottom: 2rem;">Let's build something incredible together.
+                    </p>
+                    <div class="contact-btn-wrapper">
+                        <span data-link="https://discord.com/users/831128213936930877" id="start-now-btn"
+                            class="btn btn-primary btn-lg">
+                            <span class="btn-text">Start Now</span>
+                            <span class="discord-content"
+                                style="display: none; opacity: 0; align-items: center; gap: 10px;">
+                                <svg class="discord-icon" viewBox="0 0 127.14 96.36" fill="currentColor"
+                                    style="width: 24px; height: 24px;">
+                                    <path
+                                        d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.39,80.21a105.73,105.73,0,0,0,32.25,16.15,77.7,77.7,0,0,0,7.14-11.59A68.52,68.52,0,0,1,26.6,77.3c2.7.2,5.4,0.42,8.06,0.61a73.2,73.2,0,0,0,57.47,0c2.66-.19,5.36-.39,8.06-0.61a68.41,68.41,0,0,1-13.19,7.47,77.62,77.62,0,0,0,7.14,11.59,105.54,105.54,0,0,0,32.25-16.15C130,51.85,123.07,28.25,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5.09-12.73,11.45-12.73S54,46,53.89,53,48.81,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5.09-12.73,11.44-12.73S96.23,46,96.12,53,91,65.69,84.69,65.69Z" />
+                                </svg>
+                                <span>Discord</span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Laucey. Created with <span class="heart">❤️</span> by Laucey.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
