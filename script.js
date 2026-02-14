@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function raf(time) {
         lenis.raf(time);
+        ScrollTrigger.update(); // Synchronize GSAP ScrollTrigger with Lenis
         requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
@@ -36,6 +37,83 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    function updateSpotlight(e) {
+        const card = e.currentTarget;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+    }
+
+    // Render Past Works from Config
+    function renderPastWorks() {
+        const grid = document.getElementById('works-grid');
+        if (!grid || !window.portfolioConfig) return;
+
+        grid.innerHTML = window.portfolioConfig.pastWorks.map(project => `
+            <div class="work-card" data-id="${project.id}" ${project.link ? `data-link="${project.link}" style="cursor: pointer;"` : ''}>
+                <div class="work-image-wrapper">
+                    <span class="work-year-badge">${project.year}</span>
+                    ${project.image ? `
+                        <img src="${project.image}" alt="${project.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;">
+                    ` : `
+                        <div class="work-placeholder" 
+                            style="background: ${project.gradient}; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 900; color: ${project.color}; opacity: 0.8; text-align: center; padding: 1rem;">
+                            ${project.placeholderText}
+                        </div>
+                    `}
+                    ${project.link ? `
+                        <div class="work-link-icon" style="position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.5); padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); z-index: 3;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                        </div>
+                    ` : ''}
+                </div>
+                <div class="work-content">
+                    <span class="work-category">${project.category}</span>
+                    <h3 class="work-title">${project.title}</h3>
+                    <p class="work-type">${project.type}</p>
+                    <div class="work-footer">
+                        <div class="work-meta-item">${project.location}</div>
+                        <div class="work-meta-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                            <span>${project.users}</span>
+                        </div>
+                        <div class="work-status status-${project.status}">
+                            <div class="status-dot"></div>
+                            ${project.status.toUpperCase()}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        // Re-attach listeners to new cards
+        const cards = grid.querySelectorAll('.work-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', updateSpotlight);
+
+            // Add click listener for internal linking
+            card.addEventListener('click', () => {
+                const url = card.getAttribute('data-link');
+                if (url) {
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                }
+            });
+        });
+    }
+
+    renderPastWorks();
 
     function setupTypingEffect(elementId, textsToType, options = {}) {
         const element = document.getElementById(elementId);
@@ -132,12 +210,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.y = this.originY;
                 this.offX = 0;
                 this.offY = 0;
-                this.vx = (Math.random() - 0.5) * 0.2;
-                this.vy = (Math.random() - 0.5) * 0.2;
+                this.vx = (Math.random() - 0.5) * 0.15;
+                this.vy = (Math.random() - 0.5) * 0.15;
                 this.size = Math.random() * 1.5 + 0.5;
-                this.color = `rgba(150, 220, 255, ${Math.random() * 0.5 + 0.3})`;
-                this.friction = 0.98;
-                this.ease = 0.05;
+                this.color = `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.2})`;
+                this.friction = 0.95;
+                this.ease = 0.03;
                 this.parallaxFactor = Math.random() * 0.3 + 0.05;
             }
 
@@ -167,8 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
 
-                if (Math.random() > 0.98) {
-                    ctx.shadowBlur = 10;
+                if (Math.random() > 0.99) {
+                    ctx.shadowBlur = 8;
                     ctx.shadowColor = 'white';
                     ctx.fill();
                     ctx.shadowBlur = 0;
@@ -445,34 +523,104 @@ document.addEventListener('DOMContentLoaded', () => {
                     .to({}, { duration: 0.8 });
             });
         }
+
+        const skillsTrack = document.querySelector('.skills-track');
+        const skillSlides = gsap.utils.toArray('.skill-slide');
+
+        if (skillsTrack && skillSlides.length > 0) {
+            const getScrollDistance = () => skillsTrack.scrollWidth - window.innerWidth;
+
+            gsap.to(skillsTrack, {
+                x: () => -getScrollDistance(),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".skills-section",
+                    pin: true,
+                    scrub: 0.5,
+                    start: "top top",
+                    end: () => `+=${getScrollDistance()}`,
+                    invalidateOnRefresh: true,
+                    anticipatePin: 1,
+                    onUpdate: (self) => {
+                        skillSlides.forEach((slide) => {
+                            const slideRect = slide.getBoundingClientRect();
+                            const slideCenter = slideRect.left + slideRect.width / 2;
+                            if (slideCenter < window.innerWidth && slideCenter > 0) {
+                                const bar = slide.querySelector('.skill-progress-bar');
+                                if (bar && !bar.classList.contains('animated')) {
+                                    bar.style.width = bar.getAttribute('data-width');
+                                    bar.classList.add('animated');
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        // Refresh ScrollTrigger to account for new dynamic layout
+        ScrollTrigger.refresh();
     }
 
-    const spotlightCards = document.querySelectorAll('.about-card, .visual-card, .bento-card, .contact-wrapper');
-    if (spotlightCards.length > 0) {
-        spotlightCards.forEach(card => {
+
+    const staticSpotlightCards = document.querySelectorAll('.about-card, .visual-card, .bento-card, .contact-wrapper');
+    staticSpotlightCards.forEach(card => {
+        card.addEventListener('mousemove', updateSpotlight);
+
+        // Specialized 3D tilt for visual-card
+        if (card.classList.contains('visual-card')) {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
 
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+
+                card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             });
-        });
-    }
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg)`;
+            });
+        }
+    });
 
     const navLinks = document.querySelectorAll('.nav-links a');
     const sections = document.querySelectorAll('section');
 
     const updateActiveLink = () => {
-        let currentSectionId = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.scrollY >= sectionTop - 150) {
-                currentSectionId = section.getAttribute('id');
-            }
-        });
+        let currentSectionId = 'home';
+
+        if (window.scrollY < 100) {
+            currentSectionId = 'home';
+        }
+        else if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100) {
+            currentSectionId = 'contact';
+        }
+        else {
+            const viewportCenter = window.innerHeight / 2;
+            let minDistance = Infinity;
+
+            const linkedSections = Array.from(sections).filter(section => {
+                const id = section.getAttribute('id');
+                return id && document.querySelector(`.nav-links a[href="#${id}"]`);
+            });
+
+            linkedSections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const sectionCenter = rect.top + rect.height / 2;
+                const distance = Math.abs(sectionCenter - viewportCenter);
+
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+        }
 
         navLinks.forEach(link => {
             link.classList.remove('active');
@@ -594,5 +742,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.open(url, '_blank', 'noopener,noreferrer');
             }
         });
+    });
+
+    window.addEventListener('load', () => {
+        if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+        }
     });
 });
