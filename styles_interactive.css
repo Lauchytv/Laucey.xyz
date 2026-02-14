@@ -40,7 +40,6 @@ button,
     cursor: none !important;
 }
 
-
 #cursor-canvas {
     position: fixed;
     top: 0;
@@ -60,7 +59,6 @@ button,
     z-index: 100000;
     pointer-events: none;
 }
-
 
 html.lenis {
     height: auto;

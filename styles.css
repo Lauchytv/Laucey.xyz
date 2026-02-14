@@ -35,7 +35,6 @@
     --transition-base: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -59,7 +58,6 @@ body {
     overflow-x: hidden;
     position: relative;
 }
-
 
 ::-webkit-scrollbar {
     width: 8px;
@@ -89,12 +87,10 @@ body {
     box-shadow: 0 0 10px var(--color-neon-purple);
 }
 
-
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--color-neon-purple) var(--color-dark-surface);
 }
-
 
 .container {
     max-width: 1440px;
@@ -103,7 +99,6 @@ body {
     position: relative;
     z-index: 10;
 }
-
 
 h1,
 h2,
@@ -125,7 +120,6 @@ h3 {
     -webkit-text-fill-color: transparent;
 }
 
-
 .glass {
     background: var(--color-glass-surface);
     backdrop-filter: blur(12px) saturate(180%);
@@ -139,7 +133,6 @@ h3 {
     box-shadow: var(--shadow-glow-intense),
         0 0 100px rgba(0, 212, 255, 0.2);
 }
-
 
 .navbar {
     position: fixed;
@@ -341,7 +334,6 @@ h3 {
     height: 24px;
 }
 
-
 .hero-section {
     min-height: 100vh;
     display: flex;
@@ -437,7 +429,6 @@ h1 {
     transform: translateY(-2px);
 }
 
-
 .hero-visual-card {
     flex: 1;
     max-width: 550px;
@@ -466,7 +457,6 @@ h1 {
         transform: translateY(-20px) rotate(1deg);
     }
 }
-
 
 .card-header {
     background: rgba(255, 255, 255, 0.02);
@@ -651,14 +641,13 @@ h1 {
     }
 }
 
-
 .hero-visual {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
-    /* Above background canvas */
+
     pointer-events: none;
     width: 600px;
     height: 600px;
@@ -840,7 +829,6 @@ h1 {
     }
 }
 
-
 .section {
     padding: var(--space-4xl) 0;
     position: relative;
@@ -860,7 +848,6 @@ h1 {
     color: var(--color-text-secondary);
     font-size: 1.2rem;
 }
-
 
 .about-grid {
     display: grid;
@@ -895,7 +882,6 @@ h1 {
     box-shadow: var(--shadow-glow),
         0 0 60px rgba(0, 212, 255, 0.15);
 }
-
 
 .stack-marquee {
     overflow: hidden;
@@ -944,7 +930,6 @@ h1 {
     text-shadow: 0 0 20px var(--color-neon-purple);
 }
 
-
 .contact-section {
     text-align: center;
 }
@@ -964,14 +949,12 @@ h1 {
     margin-top: 2rem;
 }
 
-
 .footer {
     padding: 2rem 0;
     text-align: center;
     color: var(--color-text-muted);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
-
 
 @keyframes pulse {
 
@@ -1035,7 +1018,6 @@ h1 {
     animation: marquee 30s linear infinite;
 }
 
-
 @media (max-width: 768px) {
     .h1 {
         font-size: 3rem;
@@ -1059,7 +1041,6 @@ h1 {
 
     }
 }
-
 
 .cursor {
     width: 8px;
@@ -1085,9 +1066,6 @@ h1 {
     border-color: transparent;
 }
 
-
-
-
 #bg-canvas {
     position: fixed;
     top: 0;
@@ -1098,10 +1076,6 @@ h1 {
     opacity: 0.5;
     pointer-events: none;
 }
-
-
-
-
 
 html.lenis {
     height: auto;
@@ -1123,12 +1097,10 @@ html.lenis {
     pointer-events: none;
 }
 
-
 .about-card {
     transform-style: preserve-3d;
     transform: perspective(1000px);
 }
-
 
 .hero-text h1 .line {
     overflow: hidden;
@@ -1139,13 +1111,6 @@ html.lenis {
     transform: translateY(100%);
     display: inline-block;
 }
-
-
-
-
-
-
-
 
 .hero-content {
     display: flex;
@@ -1178,8 +1143,6 @@ html.lenis {
     justify-content: flex-start;
     margin-top: 2rem;
 }
-
-
 
 .bento-grid {
     display: grid;
@@ -1218,7 +1181,6 @@ html.lenis {
     }
 }
 
-
 .bento-card {
     padding: 2.5rem;
     border-radius: 2rem;
@@ -1237,7 +1199,6 @@ html.lenis {
     border-color: rgba(138, 43, 226, 0.3);
 
 }
-
 
 .bento-card::before {
     content: "";
@@ -1271,7 +1232,6 @@ html.lenis {
     margin-bottom: 0.5rem;
 }
 
-
 .feature-list {
     list-style: none;
     margin-top: 1.5rem;
@@ -1294,7 +1254,6 @@ html.lenis {
     padding-left: 5px;
 }
 
-
 .visual-line {
     height: 2px;
     width: 100%;
@@ -1302,7 +1261,6 @@ html.lenis {
     opacity: 0.3;
     margin: 10px 0;
 }
-
 
 .lucide-icon {
     width: 2.5rem;
@@ -1336,8 +1294,6 @@ html.lenis {
     filter: drop-shadow(0 0 10px var(--color-neon-purple));
 }
 
-
-
 .services-section {
     position: relative;
     overflow: hidden;
@@ -1357,7 +1313,6 @@ html.lenis {
     position: relative;
     width: 100%;
 }
-
 
 .service-slides {
     width: 100%;
@@ -1391,7 +1346,6 @@ html.lenis {
     visibility: visible;
     pointer-events: auto;
 }
-
 
 .slide-content {
     flex: 1;
@@ -1538,7 +1492,6 @@ html.lenis {
     color: white;
 }
 
-
 .service-indicators {
     position: absolute;
     right: 3rem;
@@ -1584,14 +1537,8 @@ html.lenis {
 
     }
 
-
 }
 
-/* Closing media query from services */
-
-/* --- Skills Section --- */
-
-/* --- Clean Skills Section --- */
 .skills-section {
     position: relative;
     width: 100%;
@@ -1613,7 +1560,6 @@ html.lenis {
     z-index: 1;
 }
 
-/* Smooth transitions at top and bottom */
 .skills-section::before,
 .skills-section::after {
     content: '';
@@ -1921,16 +1867,12 @@ html.lenis {
     }
 }
 
-
-
-/* --- Past Works Section --- */
 .works-section {
     padding: 100px 0;
     background: transparent;
     position: relative;
 }
 
-/* Smooth transition from Skills section */
 .works-section::before {
     content: '';
     position: absolute;
@@ -2010,7 +1952,7 @@ html.lenis {
 
 .work-card:nth-child(even) .work-image-wrapper {
     border-left: none;
-    /* Reset alternating border */
+
 }
 
 .work-image-wrapper img {

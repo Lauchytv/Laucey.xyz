@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function raf(time) {
         lenis.raf(time);
-        ScrollTrigger.update(); // Synchronize GSAP ScrollTrigger with Lenis
+        ScrollTrigger.update(); 
         requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         card.style.setProperty('--mouse-y', `${y}px`);
     }
 
-    // Render Past Works from Config
     function renderPastWorks() {
         const grid = document.getElementById('works-grid');
         if (!grid || !window.portfolioConfig) return;
@@ -98,12 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
 
-        // Re-attach listeners to new cards
         const cards = grid.querySelectorAll('.work-card');
         cards.forEach(card => {
             card.addEventListener('mousemove', updateSpotlight);
 
-            // Add click listener for internal linking
             card.addEventListener('click', () => {
                 const url = card.getAttribute('data-link');
                 if (url) {
@@ -558,16 +555,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Refresh ScrollTrigger to account for new dynamic layout
         ScrollTrigger.refresh();
     }
-
 
     const staticSpotlightCards = document.querySelectorAll('.about-card, .visual-card, .bento-card, .contact-wrapper');
     staticSpotlightCards.forEach(card => {
         card.addEventListener('mousemove', updateSpotlight);
 
-        // Specialized 3D tilt for visual-card
         if (card.classList.contains('visual-card')) {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
