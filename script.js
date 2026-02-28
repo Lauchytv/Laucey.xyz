@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function raf(time) {
         lenis.raf(time);
-        ScrollTrigger.update(); 
+        ScrollTrigger.update();
         requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
@@ -164,6 +164,85 @@ document.addEventListener('DOMContentLoaded', () => {
         delay: 1500
     });
 
+    const codeToType = [
+        { text: "const ", type: "keyword" },
+        { text: "Laucey", type: "type" },
+        { text: " = {\n", type: "punctuation" },
+        { text: "  age", type: "property" },
+        { text: ": ", type: "punctuation" },
+        { text: "19", type: "number" },
+        { text: ",\n", type: "punctuation" },
+        { text: "  role", type: "property" },
+        { text: ": ", type: "punctuation" },
+        { text: '"Fullstack AI Developer"', type: "string" },
+        { text: ",\n", type: "punctuation" },
+        { text: "  location", type: "property" },
+        { text: ": ", type: "punctuation" },
+        { text: '"Germany"', type: "string" },
+        { text: ",\n", type: "punctuation" },
+        { text: "  stack", type: "property" },
+        { text: ": ", type: "punctuation" },
+        { text: '["Next.js"', type: "string" },
+        { text: ", ", type: "punctuation" },
+        { text: '"Lua"', type: "string" },
+        { text: ", ", type: "punctuation" },
+        { text: '"AI"', type: "string" },
+        { text: "],\n", type: "punctuation" },
+        { text: "  contact", type: "property" },
+        { text: ": {\n", type: "punctuation" },
+        { text: "    discord", type: "property" },
+        { text: ": ", type: "punctuation" },
+        { text: '"6172221"', type: "string" },
+        { text: "\n  }\n", type: "punctuation" },
+        { text: "};\n", type: "punctuation" }
+    ];
+
+    const editorContent = document.getElementById('editor-code-content');
+    const lineNumbers = document.getElementById('editor-line-numbers');
+
+    if (editorContent && lineNumbers) {
+        let snippetIndex = 0;
+        let charIndex = 0;
+        let currentLine = 1;
+
+        lineNumbers.innerHTML = `<span>1</span>`;
+        let cursorSpan = '<span class="type-cursor"></span>';
+        let typedHTML = '';
+
+        function typeCode() {
+            if (snippetIndex >= codeToType.length) return;
+
+            const currentToken = codeToType[snippetIndex];
+            const char = currentToken.text[charIndex];
+
+            let charSpan = '';
+            if (char === '\n') {
+                charSpan = '<br>';
+                currentLine++;
+                lineNumbers.innerHTML += `<span>${currentLine}</span>`;
+            } else if (char === ' ') {
+                charSpan = '&nbsp;';
+            } else {
+                charSpan = `<span class="token-${currentToken.type}">${char}</span>`;
+            }
+
+            typedHTML += charSpan;
+            editorContent.innerHTML = typedHTML + cursorSpan;
+
+            charIndex++;
+            if (charIndex >= currentToken.text.length) {
+                snippetIndex++;
+                charIndex = 0;
+            }
+
+            const delay = Math.random() * 40 + 10;
+            setTimeout(typeCode, delay);
+        }
+
+        setTimeout(typeCode, 1500);
+    }
+
+
     const canvas = document.getElementById('bg-canvas');
     const cursorCanvas = document.getElementById('cursor-canvas');
 
@@ -172,11 +251,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const cursorCtx = cursorCanvas.getContext('2d');
         let width, height;
 
+        let lastParticleTime = 0;
         window.addEventListener('mousemove', () => {
-            if (trailParticles) {
-                for (let i = 0; i < 4; i++) {
+            const now = Date.now();
+            if (now - lastParticleTime > 20 && trailParticles && trailParticles.length < 50) {
+                for (let i = 0; i < 2; i++) {
                     trailParticles.push(new TrailParticle(mouse.x, mouse.y));
                 }
+                lastParticleTime = now;
             }
         });
 
@@ -260,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.size = Math.random() * 2 + 0.5;
                 this.life = 1;
                 this.decay = Math.random() * 0.02 + 0.01;
-                this.color = `0, 212, 255`;
+                this.color = `255, 255, 255`;
             }
 
             update() {
@@ -284,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function initParticles() {
             particles = [];
-            const particleCount = window.innerWidth < 768 ? 80 : 250;
+            const particleCount = window.innerWidth < 768 ? 35 : 80;
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -304,10 +386,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     const b = particles[j];
                     const dx = a.x - b.x;
                     const dy = a.y - b.y;
+
+                    if (Math.abs(dx) > 150 || Math.abs(dy) > 150) continue;
+
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
-                    if (dist < 180) {
-                        ctx.strokeStyle = `rgba(100, 200, 255, ${0.12 - dist / 1500})`;
+                    if (dist < 150) {
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 - dist / 1000})`;
                         ctx.lineWidth = 0.4;
                         ctx.beginPath();
                         ctx.moveTo(a.x, a.y);
@@ -624,7 +709,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    window.addEventListener('scroll', updateActiveLink);
+    let scrollTicking = false;
+    window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+            window.requestAnimationFrame(() => {
+                updateActiveLink();
+                scrollTicking = false;
+            });
+            scrollTicking = true;
+        }
+    });
     updateActiveLink();
 
     navLinks.forEach(link => {

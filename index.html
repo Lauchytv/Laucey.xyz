@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laucey - Portfolio</title>
     <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='70' fill='%2300d4ff'%3ELC%3C/text%3E%3C/svg%3E">
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='70' fill='%23ffffff'%3ELC%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -62,57 +62,21 @@
                     </div>
                 </div>
 
-                <div class="hero-visual-card glass">
-                    <div class="card-header">
-                        <div class="header-left">
-                            <div class="ai-badge">
-                                <span class="ai-dot"></span>
-                                <span>AI ACTIVE</span>
-                            </div>
+                <div class="hero-visual-card mac-window">
+                    <div class="mac-header">
+                        <div class="mac-buttons">
+                            <div class="mac-btn close"></div>
+                            <div class="mac-btn minimize"></div>
+                            <div class="mac-btn maximize"></div>
                         </div>
-                        <div class="header-right">
-                            <div class="metric">
-                                <span class="metric-label">Efficiency</span>
-                                <span class="metric-value">98%</span>
-                            </div>
-                        </div>
+                        <div class="mac-title">about_me.js</div>
                     </div>
-                    <div class="card-body">
-                        <div class="terminal-output">
-                            <div class="output-line">
-                                <span class="prompt">$</span>
-                                <span class="command">ai generate --project portfolio</span>
+                    <div class="mac-body">
+                        <div class="code-editor">
+                            <div class="line-numbers" id="editor-line-numbers">
+                                <span>1</span>
                             </div>
-                            <div class="output-line success">
-                                <span class="icon">☑</span>
-                                <span>Analyzing requirements...</span>
-                            </div>
-                            <div class="output-line success">
-                                <span class="icon">☑</span>
-                                <span>Generating components...</span>
-                            </div>
-                            <div class="output-line success">
-                                <span class="icon">☑</span>
-                                <span>Optimizing performance...</span>
-                            </div>
-                            <div class="output-line processing">
-                                <span class="icon spinner">◐</span>
-                                <span>Deploying to production...</span>
-                            </div>
-                        </div>
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <div class="stat-number">10x</div>
-                                <div class="stat-label">Faster</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">0</div>
-                                <div class="stat-label">Bugs</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">100%</div>
-                                <div class="stat-label">Quality</div>
-                            </div>
+                            <div class="code-content" id="editor-code-content"><span class="type-cursor"></span></div>
                         </div>
                     </div>
                 </div>

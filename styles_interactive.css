@@ -1,7 +1,7 @@
 .cursor {
     width: 8px;
     height: 8px;
-    background: var(--color-neon-purple);
+    background: #ffffff;
     border-radius: 50%;
     position: fixed;
     top: 0;
@@ -15,7 +15,7 @@
 .cursor-follower {
     width: 40px;
     height: 40px;
-    border: 1px solid var(--color-neon-purple);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     position: fixed;
     top: 0;
@@ -29,7 +29,7 @@
 
 .cursor-hover .cursor-follower {
     transform: translate(-50%, -50%) scale(1.5);
-    background-color: rgba(0, 212, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     border-color: transparent;
 }
 
@@ -91,7 +91,7 @@ html.lenis {
 
 .typing-cursor {
     font-weight: 200;
-    color: var(--color-neon-purple);
+    color: #ffffff;
     animation: blink 0.8s infinite;
     margin-left: 5px;
 }
@@ -121,7 +121,7 @@ html.lenis {
 
     40% {
         transform: scale(1.04);
-        text-shadow: 0 0 25px var(--color-neon-purple);
+        text-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
     }
 
     100% {
